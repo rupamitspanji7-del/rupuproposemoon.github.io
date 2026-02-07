@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rupam ❤️ Sneha</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe4ec, #ffd6e6, #ffc2db);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.95);
+      padding: 50px 40px;
+      border-radius: 30px;
+      max-width: 750px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(255, 0, 100, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 { font-size: 48px; color: #e11d48; margin-bottom: 20px; }
+    p { font-size: 20px; color: #444; line-height: 1.7; margin-bottom: 20px; }
+    h2 { font-size: 28px; color: #be123c; margin-bottom: 20px; }
+
+    /* Boy Walking */
+    .walk-scene { position: relative; height: 80px; margin: 20px 0; overflow: hidden; }
+    .boy { position: absolute; font-size: 40px; animation: walk 6s linear infinite; }
+    @keyframes walk { 0% { left: -10%; } 100% { left: 110%; } }
+
+    /* Timeline */
+    .timeline { margin-top: 25px; text-align: left; display: none; }
+    .timeline h3 { color: #e11d48; margin-bottom: 15px; }
+    .date-item {
+      padding: 12px 15px;
+      border-radius: 12px;
+      background: #ffe4ec;
+      margin-bottom: 10px;
+      font-weight: 500;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+
+    /* Buttons */
+    .btn-group, .music-controls { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+
+    button {
+      padding: 18px 40px;
+      border-radius: 18px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .primary { background: #e11d48; color: white; box-shadow: 0 10px 25px rgba(225,29,72,0.4); }
+    .primary:hover { background: #be123c; }
+
+    .outline { background: transparent; border: 2px solid #e11d48; color: #e11d48; }
+    .outline:hover { background: #ffe4ec; }
+
+    footer { margin-top: 30px; color: #be123c; font-weight: 500; }
+
+    /* YES SCREEN */
+    .yes-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #ff9ac2, #ff4d8d, #e11d48);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .yes-screen h1 { font-size: 60px; margin-bottom: 20px; }
+    .yes-screen p { font-size: 26px; max-width: 650px; }
+
+    /* Heart Rain */
+    .heart { position: fixed; top: -50px; font-size: 24px; animation: heartFall linear forwards; z-index: 1000; }
+    @keyframes heartFall { to { transform: translateY(110vh); opacity: 0.7; } }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Rupam ❤️ Sneha</h1>
+
+    <p>
+      Some stories are written by destiny...
+      And ours is my favourite one.
+    </p>
+
+    <div class="walk-scene">
+      <div class="boy">🤵💍</div>
+    </div>
+
+    <h2>Sneha... Will You Be Mine Forever?</h2>
+
+    <audio id="bgMusic" src="music.mp3" loop></audio>
+
+    <div class="music-controls">
+      <button class="primary" onclick="playMusic()">▶ Play Music</button>
+      <button class="outline" onclick="pauseMusic()">⏸ Pause Music</button>
+    </div>
+
+    <div class="btn-group">
+      <button class="primary" onclick="yesClicked()">Yes ❤️</button>
+      <button class="outline" onclick="showDates()">Always ❤️</button>
+    </div>
+
+    <!-- Timeline Dates -->
+    <div class="timeline" id="timeline">
+      <h3>Our Beautiful Memories 💖</h3>
+      <div class="date-item">🔍 Oct 15 — Searching each other</div>
+      <div class="date-item">🤝 Oct 11 — Agreement / Connection</div>
+      <div class="date-item">🌸 Nov 18 — First Date</div>
+      <div class="date-item">🌊 Nov — River Memory</div>
+      <div class="date-item">🎡 Dec 4 — Fair Day</div>
+      <div class="date-item">☕ Dec 28 — Coffee Date</div>
+      <div class="date-item">🌙 Jan 28 — Night Out</div>
+    </div>
+
+    <footer>
+      Made by Rupam, Only for Sneha 💖
+    </footer>
+  </div>
+
+  <div class="yes-screen" id="yesScreen">
+    <h1>She Said YES 💍❤️</h1>
+    <p>
+      Sneha, today you made me the happiest man alive.
+      I promise to stand beside you forever.
+      — Yours, Rupam ❤️
+    </p>
+  </div>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+
+    function playMusic() { music.play(); }
+    function pauseMusic() { music.pause(); }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    function startHeartRain() {
+      for (let i = 0; i < 40; i++) {
+        setTimeout(createHeart, i * 150);
+      }
+    }
+
+    function yesClicked() {
+      document.getElementById("yesScreen").style.display = "flex";
+      music.play();
+      startHeartRain();
+    }
+
+    function showDates() {
+      document.getElementById("timeline").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
